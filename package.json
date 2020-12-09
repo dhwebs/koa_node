@@ -1,0 +1,20 @@
+{
+  "name": "hello_koa",
+  "version": "1.0.0",
+  "description": "hello",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "hello"
+  ],
+  "author": "dh",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.0.0",
+    "koa-bodyparser": "3.2.0",
+    "koa-router": "7.0.0",
+    "koa2-cors": "^2.0.6"
+  }
+}
