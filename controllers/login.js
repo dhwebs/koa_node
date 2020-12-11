@@ -1,4 +1,5 @@
 const AccountService = require('../service/user')
+const AuthorService = require('../service/authority')
 var fn_index = async (ctx, next) => {
   ctx.response.body = `<h1 style='text-align:center'>hello Koa</h1>`;
 };
@@ -9,11 +10,13 @@ var fn_login = async (ctx, next) => {
     password : ctx.request.body.password || ''
   }
   const account =await AccountService.getAccountByUserName(obj);
-  if(account.id){
+  if(account && account.id){
+    const author=await AuthorService.getArticle()
     let obj={
       state:200,
       remark:'登录成功',
-      data:account
+      data:account,
+      author:author
     }
     ctx.body = JSON.stringify(obj);
   }else{

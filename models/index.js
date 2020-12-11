@@ -72,12 +72,59 @@ const article = sequelize.define('article', {
     type: Sequelize.INTEGER,
     allowNull: true,
   },
+  state: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
 },{
   freezeTableName: true //取消表名自动复数化
 });
 article.sync({ force: false });
+
+const authority = sequelize.define('authority', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  children: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  icon: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  grade: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+  order: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+  alias: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  path: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  belongId:{
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  },
+  type:{
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+},{
+  freezeTableName: true //取消表名自动复数化
+});
+authority.sync({ force: false });
 module.exports = {
   user,
   article,
+  authority
 };
 // export const user = sequelize.import(__dirname+ '/user.js')

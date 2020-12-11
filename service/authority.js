@@ -1,28 +1,23 @@
-const { article } = require('../models/index');
+const { authority } = require('../models/index');
 const { Op } = require("sequelize");
 
 class AccountService {
  // 通过id获取当前查询的实例
   async getArticleById(id) {
-    return article.findOne({
+    return authority.findOne({
       where: {
         id: id,
       },
     });
   };
   // 通过username 来查询
-  async getArticle(obj,limit,cursor) {
-    let data={}
-    if(obj.title) data.title={[Op.regexp]:obj.title}
-    return article.findAndCountAll({
-      where: data,
-      offset:(cursor-1)*limit,
-      limit: limit
+  async getArticle() {
+    return authority.findAll({
     });
   };
   // 新增账户
   async createArticle(users) {
-    return article.create(users);
+    return authority.create(users);
   };
   // 更新账户
   async updateArticle(id, user) {
