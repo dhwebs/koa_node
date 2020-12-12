@@ -65,10 +65,28 @@ var update_article = async (ctx, next) => {
     ctx.body = JSON.stringify(obj);
   }
 };
+var deleteAuthority= async (ctx, next)=>{
+  let id=ctx.request.body.id
+  const account =await AccountService.destroyAuthority(id);
+  if(account){
+    let obj={
+      state:200,
+      remark:'删除成功',
+      data:account
+    }
+    ctx.body = JSON.stringify(obj);
+  }else{
+    let obj={
+      state:500,
+      remark:'删除失败',
+    }
+    ctx.body = JSON.stringify(obj);
+  }
+}
 module.exports = {
   'GET /authority': fn_index,
   'POST /authority_add': add_article,
   'POST /authority_update': update_article,
-  // 'POST /register': fn_register,
+  'DELETE /authority_delete': deleteAuthority,
   
 };

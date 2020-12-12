@@ -28,5 +28,13 @@ class AccountService {
       throw new Error('the user with id is not exist!');
     }
   }; 
+  //删除
+  async destroyAuthority(id){
+    return authority.destroy({
+      where: {
+        id: id
+      }
+    })
+  }
 };
 module.exports = new AccountService();
