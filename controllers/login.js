@@ -10,21 +10,12 @@ var fn_login = async (ctx, next) => {
     password : ctx.request.body.password || ''
   }
   const account =await AccountService.getAccountByUserName(obj);
+  console.log(ctx.fail)
   if(account && account.id){
     const author=await AuthorService.getArticle()
-    let obj={
-      state:200,
-      remark:'登录成功',
-      data:account,
-      author:author
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.success({data:account,author:author},'登录成功',200)
   }else{
-    let obj={
-      state:500,
-      remark:'账号或密码错误',
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.fail('账号或密码错误',500)
   }
 };
 var fn_register = async (ctx, next) => {
@@ -37,18 +28,9 @@ var fn_register = async (ctx, next) => {
   }
   const account =await AccountService.createAccount(user);
   if(account.id){
-    let obj={
-      state:201,
-      remark:'注册成功',
-      data:account
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.success({data:account},'注册成功',201)
   }else{
-    let obj={
-      state:500,
-      remark:'注册失败',
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.fail('注册失败',500)
   }
 };
 module.exports = {

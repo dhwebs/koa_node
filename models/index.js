@@ -122,9 +122,49 @@ const authority = sequelize.define('authority', {
   freezeTableName: true //取消表名自动复数化
 });
 authority.sync({ force: false });
+
+setIndex=sequelize.define('setindex', {
+  phone: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  github: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  logo: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  footer: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  chapter:{
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  swiper:{
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+},{
+  freezeTableName: true //取消表名自动复数化
+});
+setIndex.sync({ force: false });
+
 module.exports = {
   user,
   article,
-  authority
+  authority,
+  setIndex
 };
 // export const user = sequelize.import(__dirname+ '/user.js')

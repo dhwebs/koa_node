@@ -4,7 +4,7 @@ var fn_index = async (ctx, next) => {
     title : ctx.request.query.title || '',
     authorId : ctx.request.query.authorId || ''
   }
-  let limit=Number(ctx.request.query.limit) || 10
+  let limit=Number(ctx.request.query.limit) || 100
   let cursor=Number(ctx.request.query.cursor) || 1
   const {count, rows} =await AccountService.getArticle(obj,limit,cursor);
   let obj2={
@@ -28,18 +28,9 @@ var add_article = async (ctx, next) => {
   }
   const account =await AccountService.createArticle(user);
   if(account.id){
-    let obj={
-      state:201,
-      remark:'添加成功',
-      data:account
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.success({data:account},'添加成功',201)
   }else{
-    let obj={
-      state:500,
-      remark:'添加失败',
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.fail('添加失败',500)
   }
 };
 var update_article = async (ctx, next) => {
@@ -55,18 +46,9 @@ var update_article = async (ctx, next) => {
   let id=ctx.request.body.id
   const account =await AccountService.updateArticle(id,user);
   if(account.id){
-    let obj={
-      state:200,
-      remark:'修改成功',
-      data:account
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.success({data:account},'修改成功',200)
   }else{
-    let obj={
-      state:500,
-      remark:'修改失败',
-    }
-    ctx.body = JSON.stringify(obj);
+    ctx.fail('添加失败',500)
   }
 };
 module.exports = {

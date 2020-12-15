@@ -11,7 +11,7 @@ class AccountService {
     });
   };
   // 通过username 来查询
-  async getArticle(obj,limit,cursor) {
+  async getArticle(obj,limit=100,cursor=0) {
     let data={}
     if(obj.title) data.title={[Op.regexp]:obj.title}
     return article.findAndCountAll({
@@ -20,6 +20,7 @@ class AccountService {
       limit: limit
     });
   };
+
   // 新增账户
   async createArticle(users) {
     return article.create(users);
